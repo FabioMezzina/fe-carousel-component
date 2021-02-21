@@ -6,37 +6,44 @@ $arrow-color: $card-bg;
 
 div[id*="myCarousel"] {
   margin-bottom: 50px;
-  padding: 30px 15px;
+  padding: 30px 20px;
   min-height: 350px;
   background-color: $carousel-bg;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, .4);
+  overflow: hidden;
 }
 
 // carousel header
 div[id*="myCarousel"] .carousel-header {
   display: flex;
   margin-bottom: 30px;
+
   .icon-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 10px;
     height: 30px;
-    width: 30px;
+    min-width: 30px;
     color: $carousel-bg;
     background-color: $carousel-color;
     border-radius: 25%;
   }
 
   .title-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     flex-grow: 1;
-    height: 30px;
+    min-height: 30px;
     .title {
       line-height: 1rem;
       font-size: .9rem;
       color: $carousel-color;
     }
-
     .subtitle {
+      display: none;
       line-height: 1rem;
       font-size: .8rem;
     }
@@ -53,12 +60,21 @@ div[id*="myCarousel"] .cards {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  overflow: hidden;
   justify-content: center;
+
+  &.scroll-left {
+    animation: scroll-left .3s linear;
+  }
+  &.scroll-right {
+    animation: scroll-right .3s linear;
+  }
 
   .card {
     position: relative;
-    width: 150px;
-    margin: 2% 1%;
+    min-width: 150px;
+    max-width: 150px;
+    margin: 3% 1%;
     height: 200px;
     background-color: $card-bg;
     filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .2));
@@ -77,7 +93,6 @@ div[id*="myCarousel"] .cards {
       content: '';
       box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
     }
-
     &.collection::before {
       display: block;
       position: absolute;
@@ -90,12 +105,10 @@ div[id*="myCarousel"] .cards {
       content: '';
       box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
     }
-
     img {
       filter: grayscale(100%);
       transition: .2s;
     }
-
     &:hover img {
       filter: grayscale(0);
     }
@@ -103,7 +116,6 @@ div[id*="myCarousel"] .cards {
     .card-image-wrapper {
       position: relative;
       width: 100%;
-
 
       span {
         display: block;
@@ -117,7 +129,6 @@ div[id*="myCarousel"] .cards {
         &.type {
           left: 0;
         }
-  
         &.duration {
           right: 0;
         }
@@ -140,21 +151,71 @@ div[id*="myCarousel"] .arrow {
   align-items: center;
   justify-content: center;
   height: 100%;
+  max-height: 500px;
   width: 30px;
   color: $arrow-color;
   background-color: $arrow-bg;
+  border: 0;
+  border-radius: 10px;
   cursor: pointer;
   transition: .2s;
 
   &.prev {
-    left: 15px;
+    left: -15px;
   }
-
   &.next {
-    right: 15px;
+    right: -15px;
   }
-
   &:hover {
+    color: $carousel-color;
     background-color: rgba( $arrow-bg, .3 );
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+// scrolling animations
+@keyframes scroll-right {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+// responsive media queries
+@media screen and (min-width: 1200px) {
+  // carousel header
+  div[id*="myCarousel"] .carousel-header {
+    .title-section {
+      .subtitle {
+      display: block;
+      }
+
+    } 
+  }
+  // carousel navigation arrows
+  div[id*="myCarousel"] .arrow {
+    &.prev {
+      left: 15px;
+    }
+  
+    &.next {
+      right: 15px;
+    }
   }
 }

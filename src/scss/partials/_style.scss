@@ -6,13 +6,13 @@
 }
 
 body {
-  padding: 15px;
+  padding: 15px 0;
 }
 
 .container {
   margin: 0 auto;
-  padding: 10px 30px;
-  max-width: 1200px;
+  padding: 0;
+  width: 100%;
 }
 
 img {
@@ -23,5 +23,17 @@ img {
 }
 
 h1 {
+  color: $carousel-color;
   text-align: center;
+}
+
+@media screen and (min-width: 1200px) {
+  body {
+    padding: 15px;
+  }
+
+  .container {
+    padding: 10px 30px;
+    max-width: 1200px;
+  }
 }

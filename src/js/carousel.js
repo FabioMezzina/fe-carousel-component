@@ -28,7 +28,6 @@ class Carousel {
   renderComponent() {
     // carousel base template
     this.carouselEl.innerHTML = `
-      <div id="${this.container}">
         <!-- carousel header -->
         <header class="carousel-header">
           <div class="icon-wrapper">
@@ -54,15 +53,14 @@ class Carousel {
           </div>
 
         </section>
-      </div>
     `;
 
     // add listeners to navigation arrows
     this.carouselEl.querySelector('.prev').addEventListener('click', () => {
-      this.generateCards();
+      this.generateCards('right');
     });
     this.carouselEl.querySelector('.next').addEventListener('click', () => {
-      this.generateCards();
+      this.generateCards('left');
     });
 
     // generate cards into cards section
@@ -73,9 +71,12 @@ class Carousel {
    * render a fake loading cards list
    * after 1.5s delay, generate a real cards list
    */
-  generateCards() {
+  generateCards(dir = '') {
     // get cards wrapper DOM element
     this.cards = this.carouselEl.querySelector('.cards');
+
+    // add a dynamic class to handle the scroll animation
+    this.cards.classList.add(`scroll-${dir}`);
 
     // generate fake loading cards
     this.renderCards(true);
@@ -83,6 +84,8 @@ class Carousel {
     // generate cards after 1.5s timeout (to simulate API call)
     setTimeout(() => {
       this.renderCards(false);
+      // remove the scrolling animation class handler
+      this.cards.classList.remove(`scroll-${dir}`);
     }, 1500);
   }
 

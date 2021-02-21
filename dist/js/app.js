@@ -124,13 +124,13 @@ var Carousel = /*#__PURE__*/function () {
       var _this = this;
 
       // carousel base template
-      this.carouselEl.innerHTML = "\n      <div id=\"".concat(this.container, "\">\n        <!-- carousel header -->\n        <header class=\"carousel-header\">\n          <div class=\"icon-wrapper\">\n            <i class=\"far fa-").concat(this.icon, "\"></i>\n          </div>\n          <section class=\"title-section\">\n            <h3 class=\"title\">").concat(this.title, "</h3>\n            <p class=\"subtitle\">").concat(this.subtitle, "</p>\n          </section>\n        </header>\n        \n        <!-- carousel cards section -->\n        <section class=\"cards-section\">\n          <!-- single card -->\n          <div class=\"cards\"></div>\n\n          <!-- navigation arrows -->\n          <div class=\"arrow prev\">\n            <i class=\"fas fa-chevron-left\"></i>\n          </div>\n          <div class=\"arrow next\">\n            <i class=\"fas fa-chevron-right\"></i>\n          </div>\n\n        </section>\n      </div>\n    "); // add listeners to navigation arrows
+      this.carouselEl.innerHTML = "\n        <!-- carousel header -->\n        <header class=\"carousel-header\">\n          <div class=\"icon-wrapper\">\n            <i class=\"far fa-".concat(this.icon, "\"></i>\n          </div>\n          <section class=\"title-section\">\n            <h3 class=\"title\">").concat(this.title, "</h3>\n            <p class=\"subtitle\">").concat(this.subtitle, "</p>\n          </section>\n        </header>\n        \n        <!-- carousel cards section -->\n        <section class=\"cards-section\">\n          <!-- single card -->\n          <div class=\"cards\"></div>\n\n          <!-- navigation arrows -->\n          <div class=\"arrow prev\">\n            <i class=\"fas fa-chevron-left\"></i>\n          </div>\n          <div class=\"arrow next\">\n            <i class=\"fas fa-chevron-right\"></i>\n          </div>\n\n        </section>\n    "); // add listeners to navigation arrows
 
       this.carouselEl.querySelector('.prev').addEventListener('click', function () {
-        _this.generateCards();
+        _this.generateCards('right');
       });
       this.carouselEl.querySelector('.next').addEventListener('click', function () {
-        _this.generateCards();
+        _this.generateCards('left');
       }); // generate cards into cards section
 
       this.generateCards();
@@ -145,13 +145,19 @@ var Carousel = /*#__PURE__*/function () {
     value: function generateCards() {
       var _this2 = this;
 
+      var dir = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       // get cards wrapper DOM element
-      this.cards = this.carouselEl.querySelector('.cards'); // generate fake loading cards
+      this.cards = this.carouselEl.querySelector('.cards'); // add a dynamic class to handle the scroll animation
+
+      this.cards.classList.add("scroll-".concat(dir)); // generate fake loading cards
 
       this.renderCards(true); // generate cards after 1.5s timeout (to simulate API call)
 
       setTimeout(function () {
-        _this2.renderCards(false);
+        _this2.renderCards(false); // remove the scrolling animation class handler
+
+
+        _this2.cards.classList.remove("scroll-".concat(dir));
       }, 1500);
     }
     /**
@@ -221,22 +227,10 @@ var Carousel = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./src/scss/carousel.scss":
-/*!********************************!*\
-  !*** ./src/scss/carousel.scss ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/scss/style.scss":
-/*!*****************************!*\
-  !*** ./src/scss/style.scss ***!
-  \*****************************/
+/***/ "./src/scss/app.scss":
+/*!***************************!*\
+  !*** ./src/scss/app.scss ***!
+  \***************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -318,8 +312,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		
 /******/ 		var deferredModules = [
 /******/ 			["./src/js/app.js"],
-/******/ 			["./src/scss/carousel.scss"],
-/******/ 			["./src/scss/style.scss"]
+/******/ 			["./src/scss/app.scss"]
 /******/ 		];
 /******/ 		// no chunk on demand loading
 /******/ 		

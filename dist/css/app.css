@@ -1,8 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  padding: 15px 0;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  min-height: 100px;
+  text-align: center;
+}
+
+h1 {
+  color: #246998;
+  text-align: center;
+}
+
+@media screen and (min-width: 1200px) {
+  body {
+    padding: 15px;
+  }
+
+  .container {
+    padding: 10px 30px;
+    max-width: 1200px;
+  }
+}
 div[id*=myCarousel] {
   margin-bottom: 50px;
-  padding: 30px 15px;
+  padding: 30px 20px;
   min-height: 350px;
   background-color: gainsboro;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
 }
 
 div[id*=myCarousel] .carousel-header {
@@ -15,14 +57,17 @@ div[id*=myCarousel] .carousel-header .icon-wrapper {
   justify-content: center;
   margin-right: 10px;
   height: 30px;
-  width: 30px;
+  min-width: 30px;
   color: gainsboro;
   background-color: #246998;
   border-radius: 25%;
 }
 div[id*=myCarousel] .carousel-header .title-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   flex-grow: 1;
-  height: 30px;
+  min-height: 30px;
 }
 div[id*=myCarousel] .carousel-header .title-section .title {
   line-height: 1rem;
@@ -30,6 +75,7 @@ div[id*=myCarousel] .carousel-header .title-section .title {
   color: #246998;
 }
 div[id*=myCarousel] .carousel-header .title-section .subtitle {
+  display: none;
   line-height: 1rem;
   font-size: 0.8rem;
 }
@@ -43,12 +89,22 @@ div[id*=myCarousel] .cards {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  overflow: hidden;
   justify-content: center;
+}
+div[id*=myCarousel] .cards.scroll-left {
+  -webkit-animation: scroll-left 0.3s linear;
+          animation: scroll-left 0.3s linear;
+}
+div[id*=myCarousel] .cards.scroll-right {
+  -webkit-animation: scroll-right 0.3s linear;
+          animation: scroll-right 0.3s linear;
 }
 div[id*=myCarousel] .cards .card {
   position: relative;
-  width: 150px;
-  margin: 2% 1%;
+  min-width: 150px;
+  max-width: 150px;
+  margin: 3% 1%;
   height: 200px;
   background-color: white;
   filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.2));
@@ -119,18 +175,80 @@ div[id*=myCarousel] .arrow {
   align-items: center;
   justify-content: center;
   height: 100%;
+  max-height: 500px;
   width: 30px;
   color: white;
   background-color: rgba(0, 0, 0, 0.2);
+  border: 0;
+  border-radius: 10px;
   cursor: pointer;
   transition: 0.2s;
 }
 div[id*=myCarousel] .arrow.prev {
-  left: 15px;
+  left: -15px;
 }
 div[id*=myCarousel] .arrow.next {
-  right: 15px;
+  right: -15px;
 }
 div[id*=myCarousel] .arrow:hover {
+  color: #246998;
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+@-webkit-keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@-webkit-keyframes scroll-right {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes scroll-right {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@media screen and (min-width: 1200px) {
+  div[id*=myCarousel] .carousel-header .title-section .subtitle {
+    display: block;
+  }
+
+  div[id*=myCarousel] .arrow.prev {
+    left: 15px;
+  }
+  div[id*=myCarousel] .arrow.next {
+    right: 15px;
+  }
 }
