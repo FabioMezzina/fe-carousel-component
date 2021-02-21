@@ -98,7 +98,7 @@ class Carousel {
     if(loading) {
       const card = {
         image: 'https://www.jqueryscript.net/images/loading-indicator-view.jpg',
-        type: '',
+        type: 'loading...',
         duration: 0,
         title: 'Loading...',
         cardinality: '',
@@ -118,7 +118,7 @@ class Carousel {
       const newCard = `
         <div class="card">
           <div class="card-image-wrapper">
-            <img class="card-image" src="${card.image}" alt="card image not found">
+            <img class="card-image" src="${card.image}" alt="oops..image not found">
             <span class="type">${card.type}</span>
             <span class="duration">${time}</span>
           </div>

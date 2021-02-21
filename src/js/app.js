@@ -13,11 +13,13 @@ const fetchCards = chunkSize => {
   // create and populate the cards array to be returned
   let cards = [];
   for( let i = 0; i < chunkSize; i++) {
+    // get a random id to point at a specific image on picsum
+    const imageId = Math.floor(Math.random() * 100);
     cards.push({
-      image: 'https://picsum.photos/150/100',
+      image: `https://picsum.photos/id/${imageId}/150/100`,
       type: types[Math.floor(Math.random() * 4)],
       duration: Math.floor(Math.random() * 7200), // duration in seconds, must be converted in human readable format
-      title: 'Just a title',
+      title: `Card title ${i + 1}`,
       cardinality: cardinalities[Math.floor(Math.random() * 2)],
     });
   }
@@ -42,7 +44,7 @@ const carousel1 = new Carousel(options1);
 const options2 = {
   container: 'myCarousel2',
   icon: 'hand-point-right',
-  title: 'Another carousel instance title',
+  title: 'Another carousel instance title >',
   subtitle: 'Totam illo magnam officiis minus suscipit, enim laboriosam delectus culpa libero dignissimos.',
   /**
    * function that returns "chunkSize" card objects to be displayed in the carousel

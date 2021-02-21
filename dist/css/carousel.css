@@ -2,7 +2,7 @@ div[id*=myCarousel] {
   margin-bottom: 50px;
   padding: 30px 15px;
   min-height: 350px;
-  background-color: lightgray;
+  background-color: gainsboro;
 }
 
 div[id*=myCarousel] .carousel-header {
@@ -16,8 +16,8 @@ div[id*=myCarousel] .carousel-header .icon-wrapper {
   margin-right: 10px;
   height: 30px;
   width: 30px;
-  color: lightgray;
-  background-color: #1c1cff;
+  color: gainsboro;
+  background-color: #246998;
   border-radius: 25%;
 }
 div[id*=myCarousel] .carousel-header .title-section {
@@ -27,7 +27,7 @@ div[id*=myCarousel] .carousel-header .title-section {
 div[id*=myCarousel] .carousel-header .title-section .title {
   line-height: 1rem;
   font-size: 0.9rem;
-  color: #1c1cff;
+  color: #246998;
 }
 div[id*=myCarousel] .carousel-header .title-section .subtitle {
   line-height: 1rem;
@@ -74,7 +74,7 @@ div[id*=myCarousel] .cards .card .card-image-wrapper span.duration {
 }
 div[id*=myCarousel] .cards .card .card-title {
   padding: 5px;
-  color: #1c1cff;
+  color: #246998;
 }
 
 div[id*=myCarousel] .arrow {

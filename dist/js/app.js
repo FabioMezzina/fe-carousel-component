@@ -25,12 +25,14 @@ var fetchCards = function fetchCards(chunkSize) {
   var cards = [];
 
   for (var i = 0; i < chunkSize; i++) {
+    // get a random id to point at a specific image on picsum
+    var imageId = Math.floor(Math.random() * 100);
     cards.push({
-      image: 'https://picsum.photos/150/100',
+      image: "https://picsum.photos/id/".concat(imageId, "/150/100"),
       type: types[Math.floor(Math.random() * 4)],
       duration: Math.floor(Math.random() * 7200),
       // duration in seconds, must be converted in human readable format
-      title: 'Just a title',
+      title: "Card title ".concat(i + 1),
       cardinality: cardinalities[Math.floor(Math.random() * 2)]
     });
   } // return the JSON-like array of new cards to render
@@ -58,7 +60,7 @@ var carousel1 = new _carousel_js__WEBPACK_IMPORTED_MODULE_0__.default(options1);
 var options2 = {
   container: 'myCarousel2',
   icon: 'hand-point-right',
-  title: 'Another carousel instance title',
+  title: 'Another carousel instance title >',
   subtitle: 'Totam illo magnam officiis minus suscipit, enim laboriosam delectus culpa libero dignissimos.',
 
   /**
@@ -169,7 +171,7 @@ var Carousel = /*#__PURE__*/function () {
       if (loading) {
         var card = {
           image: 'https://www.jqueryscript.net/images/loading-indicator-view.jpg',
-          type: '',
+          type: 'loading...',
           duration: 0,
           title: 'Loading...',
           cardinality: ''
@@ -188,7 +190,7 @@ var Carousel = /*#__PURE__*/function () {
         // convert duration in a human readable format
         var time = _this3.secondsToHuman(card.duration);
 
-        var newCard = "\n        <div class=\"card\">\n          <div class=\"card-image-wrapper\">\n            <img class=\"card-image\" src=\"".concat(card.image, "\" alt=\"card image not found\">\n            <span class=\"type\">").concat(card.type, "</span>\n            <span class=\"duration\">").concat(time, "</span>\n          </div>\n          <h4 class=\"card-title\">").concat(card.title, "</h4>\n        </div>\n      ");
+        var newCard = "\n        <div class=\"card\">\n          <div class=\"card-image-wrapper\">\n            <img class=\"card-image\" src=\"".concat(card.image, "\" alt=\"oops..image not found\">\n            <span class=\"type\">").concat(card.type, "</span>\n            <span class=\"duration\">").concat(time, "</span>\n          </div>\n          <h4 class=\"card-title\">").concat(card.title, "</h4>\n        </div>\n      ");
         _this3.cards.innerHTML += newCard;
       });
     }
