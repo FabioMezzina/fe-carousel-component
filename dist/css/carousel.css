@@ -34,6 +34,10 @@ div[id*=myCarousel] .carousel-header .title-section .subtitle {
   font-size: 0.8rem;
 }
 
+div[id*=myCarousel] .cards-section {
+  position: relative;
+}
+
 div[id*=myCarousel] .cards {
   position: relative;
   width: 100%;

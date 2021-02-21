@@ -18,39 +18,109 @@ class Carousel {
     // get carousel DOM element
     this.carouselEl = document.getElementById(container);
 
-    // call the function for rendering the component after 1.5s timeout (to simulate API call)
-    setTimeout(() => {
-      this.renderComponent();
-    }, 1500);
-  }
-
-  /**
-   * generate cards array to be rendered
-   */
-  generateCards() {
-    this.cards = this.fetchCards(this.chunkSize);
+    // call the function for rendering the component
+    this.renderComponent();
   }
 
   /**
    * render the whole component
    */
   renderComponent() {
-    // ...
-    console.log(this);
-    // add listener to navigation arrows
+    this.carouselEl.innerHTML = `
+      <div id="${this.container}">
+        <!-- carousel header -->
+        <header class="carousel-header">
+          <div class="icon-wrapper">
+            <i class="far fa-${this.icon}}"></i>
+          </div>
+          <section class="title-section">
+            <h3 class="title">${this.title}</h3>
+            <p class="subtitle">${this.subtitle}</p>
+          </section>
+        </header>
+        
+        <!-- carousel cards section -->
+        <section class="cards-section">
+          <!-- single card -->
+          <div class="cards">
+
+          </div>
+
+          <!-- navigation arrows -->
+          <div class="arrow prev">
+            <i class="fas fa-chevron-left"></i>
+          </div>
+          <div class="arrow next">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+
+        </section>
+      </div>
+    `;
+
+    this.generateCards();
+  }
+
+  /*
+   * generate cards array to be rendered
+   */
+  generateCards() {
+    // get cards wrapper DOM element
+    this.cards = this.carouselEl.querySelector('.cards');
+
+    // generate fake loading cards
+    this.renderCards(true);
+
+    // add listeners to navigation arrows
     this.carouselEl.querySelector('.prev').addEventListener('click', () => {
       this.generateCards();
     });
     this.carouselEl.querySelector('.next').addEventListener('click', () => {
       this.generateCards();
     });
+
+    // generate cards after 1.5s timeout (to simulate API call)
+    setTimeout(() => {
+      this.renderCards(false);
+    }, 1500);
   }
 
   /**
-   * render cards array
+   * render a generated cards array
+   * if loading argument is true, all cards simulate a loading image
+   * if false, an array of random images is rendered
+   * @param {boolean} loading 
    */
-  renderCards() {
+  renderCards(loading) {
 
+    let cardList = [];
+    if(loading) {
+      const card = {
+        image: 'https://www.jqueryscript.net/images/loading-indicator-view.jpg',
+        type: '',
+        duration: 0,
+        title: 'Loading...',
+        cardinality: '',
+      }
+      for(let i = 0; i < this.chunkSize; i++) {
+        cardList.push(card);
+      }
+    } else {
+      cardList = this.fetchCards(this.chunkSize);
+    }
+    
+    this.cards.innerHTML = '';
+    cardList.forEach( card => {
+      const newCard = `
+        <div class="card">
+          <div class="card-image-wrapper">
+            <img class="card-image" src="${card.image}" alt="card image not found">
+          </div>
+          <h4 class="card-title">${card.title}</h4>
+        </div>
+      `;
+      this.cards.innerHTML += newCard;
+    });
   }
 }
 

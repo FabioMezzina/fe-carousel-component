@@ -10,7 +10,6 @@ const cardinalities = ['single', 'collection'];
  * it returns "chunkSize" card objects to be displayed in the carousel
  */
 const fetchCards = chunkSize => {
-  console.log('ciao');
   // create and populate the cards array to be returned
   let cards = [];
   for( let i = 0; i < chunkSize; i++) {
@@ -50,4 +49,4 @@ const options2 = {
    */
   fetchCards: fetchCards,
 };
-// const carousel2 = new Carousel(options2);
+const carousel2 = new Carousel(options2);

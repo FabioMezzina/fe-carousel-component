@@ -44,6 +44,10 @@ div[id*="myCarousel"] .carousel-header {
 }
 
 // carousel card section
+div[id*="myCarousel"] .cards-section {
+  position: relative;
+}
+
 div[id*="myCarousel"] .cards {
   position: relative;
   width: 100%;
