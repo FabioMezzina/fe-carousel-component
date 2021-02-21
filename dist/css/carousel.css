@@ -1,6 +1,81 @@
 div[id*=myCarousel] {
   margin-bottom: 50px;
-  padding: 25px 5px;
-  height: 350px;
+  padding: 30px 15px;
+  min-height: 350px;
   background-color: lightgray;
+}
+
+div[id*=myCarousel] .carousel-header {
+  display: flex;
+  margin-bottom: 30px;
+}
+div[id*=myCarousel] .carousel-header .icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  height: 30px;
+  width: 30px;
+  color: lightgray;
+  background-color: #1c1cff;
+  border-radius: 25%;
+}
+div[id*=myCarousel] .carousel-header .title-section {
+  flex-grow: 1;
+  height: 30px;
+}
+div[id*=myCarousel] .carousel-header .title-section .title {
+  line-height: 1rem;
+  font-size: 0.9rem;
+  color: #1c1cff;
+}
+div[id*=myCarousel] .carousel-header .title-section .subtitle {
+  line-height: 1rem;
+  font-size: 0.8rem;
+}
+
+div[id*=myCarousel] .cards {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+div[id*=myCarousel] .cards .card {
+  width: 150px;
+  margin: 1%;
+  height: 200px;
+  background-color: white;
+  cursor: pointer;
+}
+div[id*=myCarousel] .cards .card .card-image-wrapper {
+  width: 100%;
+}
+div[id*=myCarousel] .cards .card .card-title {
+  padding: 5px;
+  color: #1c1cff;
+}
+
+div[id*=myCarousel] .arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 30px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: 0.2s;
+}
+div[id*=myCarousel] .arrow.prev {
+  left: 15px;
+}
+div[id*=myCarousel] .arrow.next {
+  right: 15px;
+}
+div[id*=myCarousel] .arrow:hover {
+  background-color: rgba(0, 0, 0, 0.3);
 }

@@ -5,12 +5,12 @@ class Carousel {
    */
   constructor(options) {
     // destructure options object to construct Carousel class property
-    const { container, icon, title, subtitle, fetchCards } = options;
+    const { container, icon, title, subtitle } = options;
     this.container = container;
     this.icon = icon;
     this.title = title;
     this.subtitle = subtitle;
-    this.fetchCards = fetchCards;
+    this.fetchCards = options.fetchCards;
 
     // generate for every Carousel instance a random chunk size from 3 to 6
     this.chunkSize = Math.floor(Math.random() * 4 ) + 3;
@@ -36,10 +36,14 @@ class Carousel {
    */
   renderComponent() {
     // ...
-
+    console.log(this);
     // add listener to navigation arrows
-    this.carouselEl.querySelector('.prev').addEventListener('click', this.generateCards);
-    this.carouselEl.querySelector('.next').addEventListener('click', this.generateCards);
+    this.carouselEl.querySelector('.prev').addEventListener('click', () => {
+      this.generateCards();
+    });
+    this.carouselEl.querySelector('.next').addEventListener('click', () => {
+      this.generateCards();
+    });
   }
 
   /**

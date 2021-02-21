@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carousel UI demo page</title>
   <!-- styles -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css' integrity='sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==' crossorigin='anonymous'/>
   <link rel="stylesheet" href="./dist/css/carousel.css">
   <link rel="stylesheet" href="./dist/css/style.css">
   <!-- scripts -->
@@ -18,11 +19,11 @@
       <!-- carousel header -->
       <header class="carousel-header">
         <div class="icon-wrapper">
-          <img class="icon" src="" alt="">
+          <i class="far fa-lightbulb"></i>
         </div>
         <section class="title-section">
-          <h3 class="title"></h3>
-          <p class="subtitle"></p>
+          <h3 class="title">prova titolo</h3>
+          <p class="subtitle">sottotitolo</p>
         </section>
       </header>
       
@@ -31,16 +32,28 @@
         <!-- single card -->
         <div class="card">
           <div class="card-image-wrapper">
-            <img class="card-image" src="" alt="">
+            <img class="card-image" src="https://picsum.photos/150/100" alt="">
+          </div>
+          <h4 class="card-title">prova titolo immagine</h4>
+        </div>
+
+        <div class="card">
+          <div class="card-image-wrapper">
+            <img class="card-image" src="https://picsum.photos/150/100" alt="">
           </div>
           <h4 class="card-title"></h4>
         </div>
+
+        <!-- navigation arrows -->
+        <div class="arrow prev">
+          <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="arrow next">
+          <i class="fas fa-chevron-right"></i>
+        </div>
       </section>
-      
-      <!-- navigation arrows -->
-      <div class="prev"></div>
-      <div class="next"></div>
     </div>
+      
     
     <div id="myCarousel2"></div>
   </div>

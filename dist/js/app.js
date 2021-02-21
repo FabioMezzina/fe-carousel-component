@@ -66,8 +66,7 @@ var options2 = {
    * function that returns "chunkSize" card objects to be displayed in the carousel
    */
   fetchCards: fetchCards
-};
-var carousel2 = new _carousel_js__WEBPACK_IMPORTED_MODULE_0__.default(options2);
+}; // const carousel2 = new Carousel(options2);
 
 /***/ }),
 
@@ -101,13 +100,12 @@ var Carousel = /*#__PURE__*/function () {
     var container = options.container,
         icon = options.icon,
         title = options.title,
-        subtitle = options.subtitle,
-        fetchCards = options.fetchCards;
+        subtitle = options.subtitle;
     this.container = container;
     this.icon = icon;
     this.title = title;
     this.subtitle = subtitle;
-    this.fetchCards = fetchCards; // generate for every Carousel instance a random chunk size from 3 to 6
+    this.fetchCards = options.fetchCards; // generate for every Carousel instance a random chunk size from 3 to 6
 
     this.chunkSize = Math.floor(Math.random() * 4) + 3; // get carousel DOM element
 
@@ -134,10 +132,17 @@ var Carousel = /*#__PURE__*/function () {
   }, {
     key: "renderComponent",
     value: function renderComponent() {
+      var _this2 = this;
+
       // ...
-      // add listener to navigation arrows
-      this.carouselEl.querySelector('.prev').addEventListener('click', this.generateCards);
-      this.carouselEl.querySelector('.next').addEventListener('click', this.generateCards);
+      console.log(this); // add listener to navigation arrows
+
+      this.carouselEl.querySelector('.prev').addEventListener('click', function () {
+        _this2.generateCards();
+      });
+      this.carouselEl.querySelector('.next').addEventListener('click', function () {
+        _this2.generateCards();
+      });
     }
     /**
      * render cards array

@@ -50,4 +50,4 @@ const options2 = {
    */
   fetchCards: fetchCards,
 };
-const carousel2 = new Carousel(options2);
+// const carousel2 = new Carousel(options2);
