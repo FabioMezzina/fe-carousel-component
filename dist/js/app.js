@@ -1,13 +1,157 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/js/app.js":
 /*!***********************!*\
   !*** ./src/js/app.js ***!
   \***********************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _carousel_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./carousel.js */ "./src/js/carousel.js");
+ // types and cardinalities allowed values array
+// used to randomly chose a value for 'type' and 'category' card property
+
+var types = ['video', 'playlist', 'news', 'other'];
+var cardinalities = ['single', 'collection'];
+/**
+ * reusable fetchCards function
+ * it returns "chunkSize" card objects to be displayed in the carousel
+ */
+
+var fetchCards = function fetchCards(chunkSize) {
+  console.log('ciao'); // create and populate the cards array to be returned
+
+  var cards = [];
+
+  for (var i = 0; i < chunkSize; i++) {
+    cards.push({
+      image: 'https://picsum.photos/150/100',
+      type: types[Math.floor(Math.random() * 4)],
+      duration: 3600,
+      // duration in seconds, must be converted in human readable format
+      title: 'Just a title',
+      cardinality: cardinalities[Math.floor(Math.random() * 2)]
+    });
+  } // return the JSON-like array of new cards to render
 
 
+  return cards;
+};
+/* First carousel instance */
+
+
+var options1 = {
+  container: 'myCarousel1',
+  icon: 'collections',
+  title: 'Fresh and just uploaded content >',
+  subtitle: 'lorem ipsum dolor sit amet, consectetur adipisicing elit. Cras mollis condimentum nisl a tristique.',
+
+  /**
+   * function that returns "chunkSize" card objects to be displayed in the carousel
+   */
+  fetchCards: fetchCards
+};
+var carousel1 = new _carousel_js__WEBPACK_IMPORTED_MODULE_0__.default(options1);
+/* Second carousel instance */
+
+var options2 = {
+  container: 'myCarousel2',
+  icon: 'event_seat',
+  title: 'Another carousel instance title',
+  subtitle: 'Totam illo magnam officiis minus suscipit, enim laboriosam delectus culpa libero dignissimos.',
+
+  /**
+   * function that returns "chunkSize" card objects to be displayed in the carousel
+   */
+  fetchCards: fetchCards
+};
+var carousel2 = new _carousel_js__WEBPACK_IMPORTED_MODULE_0__.default(options2);
+
+/***/ }),
+
+/***/ "./src/js/carousel.js":
+/*!****************************!*\
+  !*** ./src/js/carousel.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Carousel = /*#__PURE__*/function () {
+  /**
+   * carousel constructor function
+   * @param {object} options 
+   */
+  function Carousel(options) {
+    var _this = this;
+
+    _classCallCheck(this, Carousel);
+
+    // destructure options object to construct Carousel class property
+    var container = options.container,
+        icon = options.icon,
+        title = options.title,
+        subtitle = options.subtitle,
+        fetchCards = options.fetchCards;
+    this.container = container;
+    this.icon = icon;
+    this.title = title;
+    this.subtitle = subtitle;
+    this.fetchCards = fetchCards; // generate for every Carousel instance a random chunk size from 3 to 6
+
+    this.chunkSize = Math.floor(Math.random() * 4) + 3; // get carousel DOM element
+
+    this.carouselEl = document.getElementById(container); // call the function for rendering the component after 1.5s timeout (to simulate API call)
+
+    setTimeout(function () {
+      _this.renderComponent();
+    }, 1500);
+  }
+  /**
+   * generate cards array to be rendered
+   */
+
+
+  _createClass(Carousel, [{
+    key: "generateCards",
+    value: function generateCards() {
+      this.cards = this.fetchCards(this.chunkSize);
+    }
+    /**
+     * render the whole component
+     */
+
+  }, {
+    key: "renderComponent",
+    value: function renderComponent() {
+      // ...
+      // add listener to navigation arrows
+      this.carouselEl.querySelector('.prev').addEventListener('click', this.generateCards);
+      this.carouselEl.querySelector('.next').addEventListener('click', this.generateCards);
+    }
+    /**
+     * render cards array
+     */
+
+  }, {
+    key: "renderCards",
+    value: function renderCards() {}
+  }]);
+
+  return Carousel;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Carousel);
 
 /***/ }),
 
@@ -17,7 +161,6 @@
   \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -30,7 +173,6 @@ __webpack_require__.r(__webpack_exports__);
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -69,6 +211,18 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	// It's empty as some runtime module handles the default behavior
 /******/ 	__webpack_require__.x = x => {};
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))

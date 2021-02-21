@@ -1,0 +1,7 @@
+$carousel-bg: lightgray;
+div[id*="myCarousel"] {
+  margin-bottom: 50px;
+  padding: 25px 5px;
+  height: 350px;
+  background-color: $carousel-bg;
+}
