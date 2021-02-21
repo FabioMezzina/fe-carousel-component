@@ -26,12 +26,13 @@ class Carousel {
    * render the whole component
    */
   renderComponent() {
+    // carousel base template
     this.carouselEl.innerHTML = `
       <div id="${this.container}">
         <!-- carousel header -->
         <header class="carousel-header">
           <div class="icon-wrapper">
-            <i class="far fa-${this.icon}}"></i>
+            <i class="far fa-${this.icon}"></i>
           </div>
           <section class="title-section">
             <h3 class="title">${this.title}</h3>
@@ -42,9 +43,7 @@ class Carousel {
         <!-- carousel cards section -->
         <section class="cards-section">
           <!-- single card -->
-          <div class="cards">
-
-          </div>
+          <div class="cards"></div>
 
           <!-- navigation arrows -->
           <div class="arrow prev">
@@ -58,19 +57,6 @@ class Carousel {
       </div>
     `;
 
-    this.generateCards();
-  }
-
-  /*
-   * generate cards array to be rendered
-   */
-  generateCards() {
-    // get cards wrapper DOM element
-    this.cards = this.carouselEl.querySelector('.cards');
-
-    // generate fake loading cards
-    this.renderCards(true);
-
     // add listeners to navigation arrows
     this.carouselEl.querySelector('.prev').addEventListener('click', () => {
       this.generateCards();
@@ -78,6 +64,21 @@ class Carousel {
     this.carouselEl.querySelector('.next').addEventListener('click', () => {
       this.generateCards();
     });
+
+    // generate cards into cards section
+    this.generateCards();
+  }
+
+  /**
+   * render a fake loading cards list
+   * after 1.5s delay, generate a real cards list
+   */
+  generateCards() {
+    // get cards wrapper DOM element
+    this.cards = this.carouselEl.querySelector('.cards');
+
+    // generate fake loading cards
+    this.renderCards(true);
 
     // generate cards after 1.5s timeout (to simulate API call)
     setTimeout(() => {
@@ -87,8 +88,8 @@ class Carousel {
 
   /**
    * render a generated cards array
-   * if loading argument is true, all cards simulate a loading image
-   * if false, an array of random images is rendered
+   * if loading argument is true, all cards generated simulate a loading image
+   * if false, an array of cards with random images is generated
    * @param {boolean} loading 
    */
   renderCards(loading) {
@@ -109,18 +110,36 @@ class Carousel {
       cardList = this.fetchCards(this.chunkSize);
     }
     
+    // delete and re-render the cardList array
     this.cards.innerHTML = '';
     cardList.forEach( card => {
+      // convert duration in a human readable format
+      const time = this.secondsToHuman(card.duration);
       const newCard = `
         <div class="card">
           <div class="card-image-wrapper">
             <img class="card-image" src="${card.image}" alt="card image not found">
+            <span class="type">${card.type}</span>
+            <span class="duration">${time}</span>
           </div>
           <h4 class="card-title">${card.title}</h4>
         </div>
       `;
       this.cards.innerHTML += newCard;
     });
+  }
+
+  /**
+   * converts an integer number of minutes into human readable format
+   * @param {number} sec 
+   */
+  secondsToHuman(sec) {
+    const hours = Math.floor(((sec % 31536000) % 86400) / 3600);
+    const minutes = Math.floor((((sec % 31536000) % 86400) % 3600) / 60);
+    let seconds = (((sec % 31536000) % 86400) % 3600) % 60;
+    seconds = (seconds < 10) ? `0${seconds}` : seconds;
+
+    return (hours > 0) ? `${hours}h ${minutes}m` : `${minutes}:${seconds}`;
   }
 }
 

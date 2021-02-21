@@ -28,7 +28,7 @@ var fetchCards = function fetchCards(chunkSize) {
     cards.push({
       image: 'https://picsum.photos/150/100',
       type: types[Math.floor(Math.random() * 4)],
-      duration: 3600,
+      duration: Math.floor(Math.random() * 7200),
       // duration in seconds, must be converted in human readable format
       title: 'Just a title',
       cardinality: cardinalities[Math.floor(Math.random() * 2)]
@@ -43,7 +43,7 @@ var fetchCards = function fetchCards(chunkSize) {
 
 var options1 = {
   container: 'myCarousel1',
-  icon: 'collections',
+  icon: 'lightbulb',
   title: 'Fresh and just uploaded content >',
   subtitle: 'lorem ipsum dolor sit amet, consectetur adipisicing elit. Cras mollis condimentum nisl a tristique.',
 
@@ -57,7 +57,7 @@ var carousel1 = new _carousel_js__WEBPACK_IMPORTED_MODULE_0__.default(options1);
 
 var options2 = {
   container: 'myCarousel2',
-  icon: 'event_seat',
+  icon: 'hand-point-right',
   title: 'Another carousel instance title',
   subtitle: 'Totam illo magnam officiis minus suscipit, enim laboriosam delectus culpa libero dignissimos.',
 
@@ -119,45 +119,50 @@ var Carousel = /*#__PURE__*/function () {
   _createClass(Carousel, [{
     key: "renderComponent",
     value: function renderComponent() {
-      this.carouselEl.innerHTML = "\n      <div id=\"".concat(this.container, "\">\n        <!-- carousel header -->\n        <header class=\"carousel-header\">\n          <div class=\"icon-wrapper\">\n            <i class=\"far fa-").concat(this.icon, "}\"></i>\n          </div>\n          <section class=\"title-section\">\n            <h3 class=\"title\">").concat(this.title, "</h3>\n            <p class=\"subtitle\">").concat(this.subtitle, "</p>\n          </section>\n        </header>\n        \n        <!-- carousel cards section -->\n        <section class=\"cards-section\">\n          <!-- single card -->\n          <div class=\"cards\">\n\n          </div>\n\n          <!-- navigation arrows -->\n          <div class=\"arrow prev\">\n            <i class=\"fas fa-chevron-left\"></i>\n          </div>\n          <div class=\"arrow next\">\n            <i class=\"fas fa-chevron-right\"></i>\n          </div>\n\n        </section>\n      </div>\n    ");
-      this.generateCards();
-    }
-    /*
-     * generate cards array to be rendered
-     */
-
-  }, {
-    key: "generateCards",
-    value: function generateCards() {
       var _this = this;
 
-      // get cards wrapper DOM element
-      this.cards = this.carouselEl.querySelector('.cards'); // generate fake loading cards
-
-      this.renderCards(true); // add listeners to navigation arrows
+      // carousel base template
+      this.carouselEl.innerHTML = "\n      <div id=\"".concat(this.container, "\">\n        <!-- carousel header -->\n        <header class=\"carousel-header\">\n          <div class=\"icon-wrapper\">\n            <i class=\"far fa-").concat(this.icon, "\"></i>\n          </div>\n          <section class=\"title-section\">\n            <h3 class=\"title\">").concat(this.title, "</h3>\n            <p class=\"subtitle\">").concat(this.subtitle, "</p>\n          </section>\n        </header>\n        \n        <!-- carousel cards section -->\n        <section class=\"cards-section\">\n          <!-- single card -->\n          <div class=\"cards\"></div>\n\n          <!-- navigation arrows -->\n          <div class=\"arrow prev\">\n            <i class=\"fas fa-chevron-left\"></i>\n          </div>\n          <div class=\"arrow next\">\n            <i class=\"fas fa-chevron-right\"></i>\n          </div>\n\n        </section>\n      </div>\n    "); // add listeners to navigation arrows
 
       this.carouselEl.querySelector('.prev').addEventListener('click', function () {
         _this.generateCards();
       });
       this.carouselEl.querySelector('.next').addEventListener('click', function () {
         _this.generateCards();
-      }); // generate cards after 1.5s timeout (to simulate API call)
+      }); // generate cards into cards section
+
+      this.generateCards();
+    }
+    /**
+     * render a fake loading cards list
+     * after 1.5s delay, generate a real cards list
+     */
+
+  }, {
+    key: "generateCards",
+    value: function generateCards() {
+      var _this2 = this;
+
+      // get cards wrapper DOM element
+      this.cards = this.carouselEl.querySelector('.cards'); // generate fake loading cards
+
+      this.renderCards(true); // generate cards after 1.5s timeout (to simulate API call)
 
       setTimeout(function () {
-        _this.renderCards(false);
+        _this2.renderCards(false);
       }, 1500);
     }
     /**
      * render a generated cards array
-     * if loading argument is true, all cards simulate a loading image
-     * if false, an array of random images is rendered
+     * if loading argument is true, all cards generated simulate a loading image
+     * if false, an array of cards with random images is generated
      * @param {boolean} loading 
      */
 
   }, {
     key: "renderCards",
     value: function renderCards(loading) {
-      var _this2 = this;
+      var _this3 = this;
 
       var cardList = [];
 
@@ -175,13 +180,31 @@ var Carousel = /*#__PURE__*/function () {
         }
       } else {
         cardList = this.fetchCards(this.chunkSize);
-      }
+      } // delete and re-render the cardList array
+
 
       this.cards.innerHTML = '';
       cardList.forEach(function (card) {
-        var newCard = "\n        <div class=\"card\">\n          <div class=\"card-image-wrapper\">\n            <img class=\"card-image\" src=\"".concat(card.image, "\" alt=\"card image not found\">\n          </div>\n          <h4 class=\"card-title\">").concat(card.title, "</h4>\n        </div>\n      ");
-        _this2.cards.innerHTML += newCard;
+        // convert duration in a human readable format
+        var time = _this3.secondsToHuman(card.duration);
+
+        var newCard = "\n        <div class=\"card\">\n          <div class=\"card-image-wrapper\">\n            <img class=\"card-image\" src=\"".concat(card.image, "\" alt=\"card image not found\">\n            <span class=\"type\">").concat(card.type, "</span>\n            <span class=\"duration\">").concat(time, "</span>\n          </div>\n          <h4 class=\"card-title\">").concat(card.title, "</h4>\n        </div>\n      ");
+        _this3.cards.innerHTML += newCard;
       });
+    }
+    /**
+     * converts an integer number of minutes into human readable format
+     * @param {number} sec 
+     */
+
+  }, {
+    key: "secondsToHuman",
+    value: function secondsToHuman(sec) {
+      var hours = Math.floor(sec % 31536000 % 86400 / 3600);
+      var minutes = Math.floor(sec % 31536000 % 86400 % 3600 / 60);
+      var seconds = sec % 31536000 % 86400 % 3600 % 60;
+      seconds = seconds < 10 ? "0".concat(seconds) : seconds;
+      return hours > 0 ? "".concat(hours, "h ").concat(minutes, "m") : "".concat(minutes, ":").concat(seconds);
     }
   }]);
 

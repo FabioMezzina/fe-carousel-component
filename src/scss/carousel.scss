@@ -63,7 +63,26 @@ div[id*="myCarousel"] .cards {
     cursor: pointer;
     
     .card-image-wrapper {
+      position: relative;
       width: 100%;
+
+      span {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        padding: 5px;
+        font-size: .7rem;
+        font-weight: 600;
+        color: white;
+        background-color: rgba($arrow-bg, .5);
+        &.type {
+          left: 0;
+        }
+  
+        &.duration {
+          right: 0;
+        }
+      }
     }
 
     .card-title {

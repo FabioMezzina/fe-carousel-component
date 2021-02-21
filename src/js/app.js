@@ -16,7 +16,7 @@ const fetchCards = chunkSize => {
     cards.push({
       image: 'https://picsum.photos/150/100',
       type: types[Math.floor(Math.random() * 4)],
-      duration: 3600, // duration in seconds, must be converted in human readable format
+      duration: Math.floor(Math.random() * 7200), // duration in seconds, must be converted in human readable format
       title: 'Just a title',
       cardinality: cardinalities[Math.floor(Math.random() * 2)],
     });
@@ -28,7 +28,7 @@ const fetchCards = chunkSize => {
 /* First carousel instance */
 const options1 = {
   container: 'myCarousel1',
-  icon: 'collections',
+  icon: 'lightbulb',
   title: 'Fresh and just uploaded content >',
   subtitle: 'lorem ipsum dolor sit amet, consectetur adipisicing elit. Cras mollis condimentum nisl a tristique.',
   /**
@@ -41,7 +41,7 @@ const carousel1 = new Carousel(options1);
 /* Second carousel instance */
 const options2 = {
   container: 'myCarousel2',
-  icon: 'event_seat',
+  icon: 'hand-point-right',
   title: 'Another carousel instance title',
   subtitle: 'Totam illo magnam officiis minus suscipit, enim laboriosam delectus culpa libero dignissimos.',
   /**
