@@ -112,7 +112,7 @@ class Carousel {
     
     // delete and re-render the cardList array
     this.cards.innerHTML = '';
-    cardList.forEach( card => {
+    cardList.forEach( (card, index) => {
       // convert duration in a human readable format
       const time = this.secondsToHuman(card.duration);
       const newCard = `
@@ -126,6 +126,10 @@ class Carousel {
         </div>
       `;
       this.cards.innerHTML += newCard;
+
+      if(card.cardinality === 'collection') {
+        this.cards.querySelectorAll('.card')[index].classList.add('collection');
+      }
     });
   }
 

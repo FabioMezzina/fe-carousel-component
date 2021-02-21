@@ -5,6 +5,10 @@
   font-family: sans-serif;
 }
 
+body {
+  padding: 15px;
+}
+
 .container {
   margin: 0 auto;
   padding: 10px 30px;
@@ -15,5 +19,9 @@ img {
   display: block;
   max-width: 100%;
   min-height: 100px;
+  text-align: center;
+}
+
+h1 {
   text-align: center;
 }

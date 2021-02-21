@@ -186,12 +186,16 @@ var Carousel = /*#__PURE__*/function () {
 
 
       this.cards.innerHTML = '';
-      cardList.forEach(function (card) {
+      cardList.forEach(function (card, index) {
         // convert duration in a human readable format
         var time = _this3.secondsToHuman(card.duration);
 
         var newCard = "\n        <div class=\"card\">\n          <div class=\"card-image-wrapper\">\n            <img class=\"card-image\" src=\"".concat(card.image, "\" alt=\"oops..image not found\">\n            <span class=\"type\">").concat(card.type, "</span>\n            <span class=\"duration\">").concat(time, "</span>\n          </div>\n          <h4 class=\"card-title\">").concat(card.title, "</h4>\n        </div>\n      ");
         _this3.cards.innerHTML += newCard;
+
+        if (card.cardinality === 'collection') {
+          _this3.cards.querySelectorAll('.card')[index].classList.add('collection');
+        }
       });
     }
     /**

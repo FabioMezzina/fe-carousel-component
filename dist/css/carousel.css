@@ -46,11 +46,45 @@ div[id*=myCarousel] .cards {
   justify-content: center;
 }
 div[id*=myCarousel] .cards .card {
+  position: relative;
   width: 150px;
-  margin: 1%;
+  margin: 2% 1%;
   height: 200px;
   background-color: white;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.2));
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+}
+div[id*=myCarousel] .cards .card.collection::after {
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  transform: translateX(-50%);
+  width: 95%;
+  height: 3px;
+  background-color: white;
+  content: "";
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+div[id*=myCarousel] .cards .card.collection::before {
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 6px;
+  background-color: white;
+  content: "";
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+div[id*=myCarousel] .cards .card img {
+  filter: grayscale(100%);
+  transition: 0.2s;
+}
+div[id*=myCarousel] .cards .card:hover img {
+  filter: grayscale(0);
 }
 div[id*=myCarousel] .cards .card .card-image-wrapper {
   position: relative;
