@@ -124,7 +124,8 @@ var Carousel = /*#__PURE__*/function () {
       var _this = this;
 
       // carousel base template
-      this.carouselEl.innerHTML = "\n        <!-- carousel header -->\n        <header class=\"carousel-header\">\n          <div class=\"icon-wrapper\">\n            <i class=\"far fa-".concat(this.icon, "\"></i>\n          </div>\n          <section class=\"title-section\">\n            <h3 class=\"title\">").concat(this.title, "</h3>\n            <p class=\"subtitle\">").concat(this.subtitle, "</p>\n          </section>\n        </header>\n        \n        <!-- carousel cards section -->\n        <section class=\"cards-section\">\n          <!-- single card -->\n          <div class=\"cards\"></div>\n\n          <!-- navigation arrows -->\n          <div class=\"arrow prev\">\n            <i class=\"fas fa-chevron-left\"></i>\n          </div>\n          <div class=\"arrow next\">\n            <i class=\"fas fa-chevron-right\"></i>\n          </div>\n\n        </section>\n    "); // add listeners to navigation arrows
+      this.carouselEl.innerHTML = "\n        <!-- carousel header -->\n        <header class=\"carousel-header\">\n          <div class=\"icon-wrapper\">\n            <i class=\"far fa-".concat(this.icon, "\"></i>\n          </div>\n          <section class=\"title-section\">\n            <h3 class=\"title\">").concat(this.title, "</h3>\n            <p class=\"subtitle\">").concat(this.subtitle, "</p>\n          </section>\n        </header>\n        \n        <!-- carousel cards section -->\n        <section class=\"cards-section\">\n          <!-- single card -->\n          <div class=\"cards\"></div>\n\n          <!-- navigation arrows -->\n          <div class=\"arrow prev\">\n            <i class=\"fas fa-chevron-left\"></i>\n          </div>\n          <div class=\"arrow next\">\n            <i class=\"fas fa-chevron-right\"></i>\n          </div>\n\n        </section>\n    "); // add event listeners to navigation arrows
+      // invokes generateCards function with a parameter indicating the scroll direction
 
       this.carouselEl.querySelector('.prev').addEventListener('click', function () {
         _this.generateCards('right');
@@ -151,7 +152,7 @@ var Carousel = /*#__PURE__*/function () {
 
       this.cards.classList.add("scroll-".concat(dir)); // generate fake loading cards
 
-      this.renderCards(true); // generate cards after 1.5s timeout (to simulate API call)
+      this.renderCards(true); // generate cards after 1.5s timeout (mimic an API call)
 
       setTimeout(function () {
         _this2.renderCards(false); // remove the scrolling animation class handler
@@ -162,7 +163,7 @@ var Carousel = /*#__PURE__*/function () {
     }
     /**
      * render a generated cards array
-     * if loading argument is true, all cards generated simulate a loading image
+     * if loading argument is true, all cards generated show a fake loading image
      * if false, an array of cards with random images is generated
      * @param {boolean} loading 
      */

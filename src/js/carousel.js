@@ -55,7 +55,8 @@ class Carousel {
         </section>
     `;
 
-    // add listeners to navigation arrows
+    // add event listeners to navigation arrows
+    // invokes generateCards function with a parameter indicating the scroll direction
     this.carouselEl.querySelector('.prev').addEventListener('click', () => {
       this.generateCards('right');
     });
@@ -81,7 +82,7 @@ class Carousel {
     // generate fake loading cards
     this.renderCards(true);
 
-    // generate cards after 1.5s timeout (to simulate API call)
+    // generate cards after 1.5s timeout (mimic an API call)
     setTimeout(() => {
       this.renderCards(false);
       // remove the scrolling animation class handler
@@ -91,7 +92,7 @@ class Carousel {
 
   /**
    * render a generated cards array
-   * if loading argument is true, all cards generated simulate a loading image
+   * if loading argument is true, all cards generated show a fake loading image
    * if false, an array of cards with random images is generated
    * @param {boolean} loading 
    */

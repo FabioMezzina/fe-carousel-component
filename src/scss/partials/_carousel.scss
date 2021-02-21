@@ -105,14 +105,7 @@ div[id*="myCarousel"] .cards {
       content: '';
       box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
     }
-    img {
-      filter: grayscale(100%);
-      transition: .2s;
-    }
-    &:hover img {
-      filter: grayscale(0);
-    }
-
+    
     .card-image-wrapper {
       position: relative;
       width: 100%;
